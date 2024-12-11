@@ -154,4 +154,96 @@ class Magazine:
 
     # Tried to access the magazine with the highest number of articles published using the class attribute.
 
+# Test case
+
+# Comprehensive Test Cases for Article, Author, and Magazine Classes
+
+def test_case():
+
+# Create authors
+    print("Creating Authors...")
+    author1 = Author("Alice Becker")
+    author2 = Author("Charles Johnson")
+    print(f"Author 1: {author1.name}")
+    print(f"Author 2: {author2.name}")
+
+    # Test attempting to modify author name
+    print("\nTesting immutability of Author name...")
+    try:
+        author1.name = "Jane Doe"
+    except Exception as e:
+        print(f"Expected Error: {e}")
+
+    # Create magazines
+    print("\nCreating Magazines...")
+    mag1 = Magazine("Tasty Times", "Food")
+    mag2 = Magazine("Explorer Journal", "Travel and Adventure")
+    print(f"Magazine 1: {mag1.name}, Category: {mag1.category}")
+    print(f"Magazine 2: {mag2.name}, Category: {mag2.category}")
+
+    # Test setting invalid magazine attributes
+    print("\nTesting invalid magazine name and category...")
+    try:
+        mag1.name = "T"  # Invalid name (too short)
+    except Exception as e:
+        print(f"Expected Error: {e}")
+
+    try:
+        mag1.category = ""  # Invalid category (empty)
+    except Exception as e:
+        print(f"Expected Error: {e}")
+
+    # Create articles
+    print("\nCreating Articles...")
+    article1 = Article(author1, mag1, "5 Quick and Healthy Breakfast Recipes")
+    article2 = Article(author1, mag1, "Exploring the World of Fermented Foods")
+    article3 = Article(author2, mag2, "Top 5 Beaches for a Dream Vacation")
+    article4 = Article(author2, mag2, "A Guide to Road Trips Across Europe")
+    print(f"Article 1: '{article1.title}', Author: {article1.author.name}, Magazine: {article1.magazine.name}")
+    print(f"Article 2: '{article2.title}', Author: {article2.author.name}, Magazine: {article2.magazine.name}")
+    print(f"Article 3: '{article3.title}', Author: {article3.author.name}, Magazine: {article3.magazine.name}")
+    print(f"Article 4: '{article4.title}', Author: {article4.author.name}, Magazine: {article4.magazine.name}")
+
+    # Test creating an invalid article
+    print("\nTesting invalid article creation...")
+    try:
+        invalid_article = Article("NotAnAuthor", mag1, "Invalid Article")
+    except Exception as e:
+        print(f"Expected Error: {e}")
+
+    # Testing Author Methods
+    print("\nTesting Author methods...")
+    print(f"Author 1 Articles: {[article.title for article in author1.articles()]}")
+    print(f"Author 2 Articles: {[article.title for article in author2.articles()]}")
+    print(f"Author 1 Magazines: {[magazine.name for magazine in author1.magazines()]}")
+    print(f"Author 2 Magazines: {[magazine.name for magazine in author2.magazines()]}")
+    print(f"Author 1 Topic Areas: {author1.topic_areas()}")
+    print(f"Author 2 Topic Areas: {author2.topic_areas()}")
+
+    # Testing Magazine Methods
+    print("\nTesting Magazine methods...")
+    print(f"Magazine 1 Articles: {[article.title for article in mag1.articles()]}")
+    print(f"Magazine 2 Articles: {[article.title for article in mag2.articles()]}")
+    print(f"Magazine 1 Contributors: {[contributor.name for contributor in mag1.contributors()]}")
+    print(f"Magazine 2 Contributors: {[contributor.name for contributor in mag2.contributors()]}")
+    print(f"Magazine 1 Article Titles: {mag1.article_titles()}")
+    print(f"Magazine 2 Article Titles: {mag2.article_titles()}")
+    print(f"Magazine 1 Contributing Authors (with >2 articles): {[author.name for author in mag1.contributing_authors() or []]}")
+    print(f"Magazine 2 Contributing Authors (with >2 articles): {[author.name for author in mag2.contributing_authors() or []]}")
+
+    # Creating additional articles to test contributing_authors method
+    print("\nAdding additional articles to test contributing authors with >2 articles...")
+    Article(author2, mag1, "How to Make Artisan Bread")
+    Article(author2, mag1, "The Science of Sourdough")
+    print(f"Updated Magazine 1 Contributing Authors: {[author.name for author in mag1.contributing_authors() or []]}")
+
+    # Verifying the class attribute for magazines
+    print("\nTesting class attribute 'all' for Magazine...")
+    print(f"All Magazines: {[mag.name for mag in Magazine.all]}")
+
+    # Verifying the class attribute for articles
+    print("\nTesting class attribute 'all' for Article...")
+    print(f"All Articles: {[article.title for article in Article.all]}")
+
+test_case()
 
